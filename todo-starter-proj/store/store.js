@@ -3,9 +3,11 @@ const { createStore } = Redux
 export const SET_TODOS = 'SET_TODOS'
 export const REMOVE_TODO = 'REMOVE_TODO'
 export const UPDATE_TODO = 'UPDATE_TODO'
+export const SET_IS_LOADING = 'SET_IS_LOADING'
 
 const initialState = {
     todos: null,
+    isLoading: false,
 }
 
 export function appReducer(state = initialState, cmd = {}) {
@@ -20,6 +22,9 @@ export function appReducer(state = initialState, cmd = {}) {
         case UPDATE_TODO:
             return { ...state, todos:
                 state.todos.map(todo => todo._id === cmd.todo._id ? cmd.todo : todo) }
+
+        case SET_IS_LOADING:
+            return { ...state, isLoading: cmd.isLoading }
 
         default:
             return state
