@@ -44,6 +44,7 @@ export function TodoIndex() {
     }
 
     function onRemoveTodo(todoId) {
+        if (!confirm('Are you sure you want to delete this todo?')) return
         todoService.remove(todoId)
             .then(() => {
                 dispatch({ type: REMOVE_TODO, todoId })
