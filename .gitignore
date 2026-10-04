@@ -1,2 +1,5 @@
 coding-academy-redux-v1.92.pdf
 node_modules/
+
+# Local unit tests (not part of the exercise)
+tests/

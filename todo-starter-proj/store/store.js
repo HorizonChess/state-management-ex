@@ -4,10 +4,12 @@ export const SET_TODOS = 'SET_TODOS'
 export const REMOVE_TODO = 'REMOVE_TODO'
 export const UPDATE_TODO = 'UPDATE_TODO'
 export const SET_IS_LOADING = 'SET_IS_LOADING'
+export const SET_FILTER_BY = 'SET_FILTER_BY'
 
 const initialState = {
     todos: null,
     isLoading: false,
+    filterBy: null,
 }
 
 export function appReducer(state = initialState, cmd = {}) {
@@ -25,6 +27,9 @@ export function appReducer(state = initialState, cmd = {}) {
 
         case SET_IS_LOADING:
             return { ...state, isLoading: cmd.isLoading }
+
+        case SET_FILTER_BY:
+            return { ...state, filterBy: { ...cmd.filterBy } }
 
         default:
             return state
