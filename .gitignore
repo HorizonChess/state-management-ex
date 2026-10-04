@@ -3,3 +3,4 @@ node_modules/
 
 # Local unit tests (not part of the exercise)
 tests/
+.claude/
