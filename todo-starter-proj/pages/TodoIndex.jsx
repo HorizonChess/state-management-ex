@@ -3,7 +3,7 @@ import { TodoList } from "../cmps/TodoList.jsx"
 import { DataTable } from "../cmps/data-table/DataTable.jsx"
 import { todoService } from "../services/todo.service.js"
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
-import { SET_TODOS } from "../store/store.js"
+import { SET_TODOS, REMOVE_TODO, UPDATE_TODO } from "../store/store.js"
 
 const { useState, useEffect } = React
 const { Link, useSearchParams } = ReactRouterDOM
@@ -26,7 +26,7 @@ export function TodoIndex() {
         todoService.query(filterBy)
             .then(todos => dispatch({ type: SET_TODOS, todos }))
             .catch(err => {
-                console.eror('err:', err)
+                console.error('err:', err)
                 showErrorMsg('Cannot load todos')
             })
     }, [filterBy])
@@ -34,7 +34,7 @@ export function TodoIndex() {
     function onRemoveTodo(todoId) {
         todoService.remove(todoId)
             .then(() => {
-                dispatch({ type: SET_TODOS, todos: todos.filter(todo => todo._id !== todoId) })
+                dispatch({ type: REMOVE_TODO, todoId })
                 showSuccessMsg(`Todo removed`)
             })
             .catch(err => {
@@ -47,12 +47,12 @@ export function TodoIndex() {
         const todoToSave = { ...todo, isDone: !todo.isDone }
         todoService.save(todoToSave)
             .then((savedTodo) => {
-                dispatch({ type: SET_TODOS, todos: todos.map(currTodo => (currTodo._id !== todo._id) ? currTodo : { ...savedTodo }) })
+                dispatch({ type: UPDATE_TODO, todo: savedTodo })
                 showSuccessMsg(`Todo is ${(savedTodo.isDone)? 'done' : 'back on your list'}`)
             })
             .catch(err => {
                 console.log('err:', err)
-                showErrorMsg('Cannot toggle todo ' + todoId)
+                showErrorMsg('Cannot toggle todo ' + todo._id)
             })
     }
 
