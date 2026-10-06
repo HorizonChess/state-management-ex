@@ -31,6 +31,7 @@ export function AppHeader() {
                     {user ?
                         <section className="user-info">
                             <Link to={`/user/${user._id}`}>Hello {user.fullname}</Link>
+                            <span className="user-balance">Balance: {user.balance}</span>
                             <button onClick={onLogout}>Logout</button>
                         </section> :
                         <NavLink to="/auth" >Login</NavLink>}

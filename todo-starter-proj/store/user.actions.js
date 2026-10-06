@@ -25,6 +25,18 @@ export function signup(credentials) {
         })
 }
 
+export function updateBalance(diff) {
+    return userService.updateBalance(diff)
+        .then(loggedinUser => {
+            store.dispatch({ type: SET_USER, loggedinUser })
+            return loggedinUser
+        })
+        .catch(err => {
+            console.log('user action -> Cannot update balance', err)
+            throw err
+        })
+}
+
 export function logout() {
     return userService.logout()
         .then(() => store.dispatch({ type: SET_USER, loggedinUser: null }))

@@ -8,10 +8,12 @@ export const userService = {
     signup,
     getById,
     query,
-    getEmptyCredentials
+    getEmptyCredentials,
+    updateBalance,
 }
 const STORAGE_KEY_LOGGEDIN = 'user'
 const STORAGE_KEY = 'userDB'
+const STARTING_BALANCE = 20
 
 function query() {
     return storageService.query(STORAGE_KEY)
@@ -39,6 +41,8 @@ function signup({ username, password, fullname }) {
                 return Promise.reject('Username taken')
             }
             user.createdAt = user.updatedAt = Date.now()
+            user.balance = STARTING_BALANCE
+            user.activities = []
             return storageService.post(STORAGE_KEY, user)
                 .then(_setLoggedinUser)
         })
@@ -53,8 +57,31 @@ function getLoggedinUser() {
     return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN))
 }
 
+// Adds diff to the logged-in user's balance and saves it
+function updateBalance(diff) {
+    const loggedinUser = getLoggedinUser()
+    if (!loggedinUser) return Promise.reject('Not logged in')
+
+    return getById(loggedinUser._id)
+        .then(user => {
+            user.balance = _getBalance(user) + diff
+            user.updatedAt = Date.now()
+            return storageService.put(STORAGE_KEY, user)
+        })
+        .then(_setLoggedinUser)
+}
+
+// Accounts created before balances existed start with the starting balance
+function _getBalance(user) {
+    return (typeof user.balance === 'number') ? user.balance : STARTING_BALANCE
+}
+
 function _setLoggedinUser(user) {
-    const userToSave = { _id: user._id, fullname: user.fullname }
+    const userToSave = {
+        _id: user._id,
+        fullname: user.fullname,
+        balance: _getBalance(user),
+    }
     sessionStorage.setItem(STORAGE_KEY_LOGGEDIN, JSON.stringify(userToSave))
     return userToSave
 }
