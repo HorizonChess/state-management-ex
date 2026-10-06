@@ -13,6 +13,7 @@ export const todoService = {
     getDefaultFilter,
     getFilterFromSearchParams,
     getImportanceStats,
+    getStats,
 }
 // For Debug (easy access from console):
 window.cs = todoService
@@ -79,6 +80,15 @@ function getFilterFromSearchParams(searchParams) {
     return filterBy
 }
 
+
+// Counts over all todos, regardless of the current filter
+function getStats() {
+    return storageService.query(TODO_KEY, 0)
+        .then(todos => ({
+            total: todos.length,
+            done: todos.filter(todo => todo.isDone).length,
+        }))
+}
 
 function getImportanceStats() {
     return storageService.query(TODO_KEY)

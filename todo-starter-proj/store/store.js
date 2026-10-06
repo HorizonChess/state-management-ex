@@ -7,6 +7,7 @@ export const REMOVE_TODO = 'REMOVE_TODO'
 export const UPDATE_TODO = 'UPDATE_TODO'
 export const SET_IS_LOADING = 'SET_IS_LOADING'
 export const SET_FILTER_BY = 'SET_FILTER_BY'
+export const SET_STATS = 'SET_STATS'
 
 export const SET_USER = 'SET_USER'
 
@@ -14,6 +15,7 @@ const initialState = {
     todos: null,
     isLoading: false,
     filterBy: null,
+    stats: null,
     loggedinUser: userService.getLoggedinUser(),
 }
 
@@ -35,6 +37,9 @@ export function appReducer(state = initialState, cmd = {}) {
 
         case SET_FILTER_BY:
             return { ...state, filterBy: { ...cmd.filterBy } }
+
+        case SET_STATS:
+            return { ...state, stats: cmd.stats }
 
         case SET_USER:
             return { ...state, loggedinUser: cmd.loggedinUser }

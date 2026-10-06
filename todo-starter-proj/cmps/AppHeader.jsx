@@ -3,6 +3,7 @@ const { useNavigate } = ReactRouter
 const { useSelector } = ReactRedux
 
 import { UserMsg } from "./UserMsg.jsx"
+import { Progress } from "./Progress.jsx"
 import { showErrorMsg } from '../services/event-bus.service.js'
 import { logout } from '../store/user.actions.js'
 
@@ -20,6 +21,7 @@ export function AppHeader() {
         <header className="app-header full main-layout">
             <section className="header-container">
                 <h1>React Todo App</h1>
+                <Progress />
                 <nav className="app-nav">
                     <NavLink to="/" >Home</NavLink>
                     <NavLink to="/about" >About</NavLink>

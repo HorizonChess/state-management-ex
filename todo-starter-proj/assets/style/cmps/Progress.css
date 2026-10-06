@@ -1,0 +1,36 @@
+.progress {
+    position: relative;
+    width: 160px;
+    height: 1.4em;
+    border-radius: 0.7em;
+    background-color: var(--clr2bg-light);
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: var(--clr2);
+    transition: width 0.3s;
+}
+
+.progress-text {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font-size: 0.8em;
+    color: black;
+}
+
+.app-footer {
+    margin-top: 2em;
+    background-color: var(--clr1);
+    color: var(--clr2bg-light);
+}
+
+.footer-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5em 0;
+}

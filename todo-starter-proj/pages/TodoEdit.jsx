@@ -1,5 +1,6 @@
 import { todoService } from "../services/todo.service.js"
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
+import { loadStats } from "../store/todo.actions.js"
 
 const { useState, useEffect } = React
 const { useNavigate, useParams } = ReactRouterDOM
@@ -45,6 +46,8 @@ export function TodoEdit() {
         ev.preventDefault()
         todoService.save(todoToEdit)
             .then((savedTodo) => {
+                // Adding or completing a todo changes the counts
+                loadStats().catch(() => showErrorMsg('Cannot load progress'))
                 navigate('/todo')
                 showSuccessMsg(`Todo Saved (id: ${savedTodo._id})`)
             })
