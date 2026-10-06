@@ -37,6 +37,21 @@ export function updateBalance(diff) {
         })
 }
 
+// Logs what the user did; does nothing when nobody is logged in
+export function addActivity(txt) {
+    if (!store.getState().loggedinUser) return Promise.resolve()
+
+    return userService.addActivity(txt)
+        .then(loggedinUser => {
+            store.dispatch({ type: SET_USER, loggedinUser })
+            return loggedinUser
+        })
+        .catch(err => {
+            console.log('user action -> Cannot add activity', err)
+            throw err
+        })
+}
+
 export function logout() {
     return userService.logout()
         .then(() => store.dispatch({ type: SET_USER, loggedinUser: null }))

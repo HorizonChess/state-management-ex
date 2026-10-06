@@ -1,6 +1,6 @@
 import { todoService } from "../services/todo.service.js"
 import { store, SET_TODOS, REMOVE_TODO, UPDATE_TODO, SET_IS_LOADING, SET_FILTER_BY, SET_STATS } from "./store.js"
-import { updateBalance } from "./user.actions.js"
+import { updateBalance, addActivity } from "./user.actions.js"
 
 export function loadTodos(filterBy) {
     store.dispatch({ type: SET_IS_LOADING, isLoading: true })
@@ -17,11 +17,16 @@ export function loadTodos(filterBy) {
 }
 
 export function removeTodo(todoId) {
+    // Grab the text now, the todo is gone after removing it
+    const { todos } = store.getState()
+    const todo = todos && todos.find(currTodo => currTodo._id === todoId)
+
     return todoService.remove(todoId)
         .then(() => {
             store.dispatch({ type: REMOVE_TODO, todoId })
             return loadStats()
         })
+        .then(() => addActivity(`Removed the Todo: '${todo ? todo.txt : todoId}'`))
         .catch(err => {
             console.log('todo action -> Cannot remove todo', err)
             throw err
@@ -42,6 +47,12 @@ export function saveTodo(todo) {
                 .then(() => {
                     // Completing a todo earns a reward; un-completing never takes it back
                     if (isCompleted && loggedinUser) return updateBalance(DONE_REWARD)
+                })
+                .then(() => {
+                    const txt = isCompleted
+                        ? `Completed the Todo: '${savedTodo.txt}'`
+                        : `Updated the Todo: '${savedTodo.txt}'`
+                    return addActivity(txt)
                 })
                 .then(() => savedTodo)
         })

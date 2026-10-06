@@ -10,6 +10,7 @@ export const userService = {
     query,
     getEmptyCredentials,
     updateBalance,
+    addActivity,
 }
 const STORAGE_KEY_LOGGEDIN = 'user'
 const STORAGE_KEY = 'userDB'
@@ -66,6 +67,20 @@ function updateBalance(diff) {
         .then(user => {
             user.balance = _getBalance(user) + diff
             user.updatedAt = Date.now()
+            return storageService.put(STORAGE_KEY, user)
+        })
+        .then(_setLoggedinUser)
+}
+
+// Records an activity (newest first) on the logged-in user and saves it
+function addActivity(txt) {
+    const loggedinUser = getLoggedinUser()
+    if (!loggedinUser) return Promise.reject('Not logged in')
+
+    return getById(loggedinUser._id)
+        .then(user => {
+            const activity = { txt, at: Date.now() }
+            user.activities = [activity, ...(user.activities || [])]
             return storageService.put(STORAGE_KEY, user)
         })
         .then(_setLoggedinUser)
