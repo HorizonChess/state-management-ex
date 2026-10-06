@@ -18,30 +18,30 @@ export function LoginSignup() {
 
     function handleSubmit(ev) {
         ev.preventDefault()
-        onLogin(credentials)
+        isSignup ? onSignup(credentials) : onLogin(credentials)
     }
-
 
     function onLogin(credentials) {
-        isSignup ? onSignup(credentials) : onLoginUser(credentials)
-    }
-
-    function onLoginUser(credentials) {
         login(credentials)
             .then(() => {
-                navigate('/')
                 showSuccessMsg('Logged in successfully')
+                navigate('/todo')
             })
-            .catch(() => { showErrorMsg('Oops try again') })
+            .catch(() => showErrorMsg('Oops try again'))
     }
 
     function onSignup(credentials) {
         signup(credentials)
             .then(() => {
-                navigate('/')
                 showSuccessMsg('Signed in successfully')
+                navigate('/todo')
             })
-            .catch(() => { showErrorMsg('Oops try again') })
+            .catch(err => showErrorMsg(err))
+    }
+
+    function toggleSignup(ev) {
+        ev.preventDefault()
+        setIsSignUp(prevIsSignup => !prevIsSignup)
     }
 
     return (
@@ -74,16 +74,15 @@ export function LoginSignup() {
                     required
                 />}
                 <button>{isSignup ? 'Signup' : 'Login'}</button>
+                <div className="btns">
+                    <a href="#" onClick={toggleSignup}>
+                        {isSignup ?
+                            'Already a member? Login' :
+                            'New user? Signup here'
+                        }
+                    </a >
+                </div>
             </form>
-
-            <div className="btns">
-                <a href="#" onClick={() => setIsSignUp(!isSignup)}>
-                    {isSignup ?
-                        'Already a member? Login' :
-                        'New user? Signup here'
-                    }
-                </a >
-            </div>
         </div >
     )
 }

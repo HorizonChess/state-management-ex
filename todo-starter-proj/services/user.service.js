@@ -32,10 +32,16 @@ function login({ username, password }) {
 
 function signup({ username, password, fullname }) {
     const user = { username, password, fullname }
-    user.createdAt = user.updatedAt = Date.now()
 
-    return storageService.post(STORAGE_KEY, user)
-        .then(_setLoggedinUser)
+    return storageService.query(STORAGE_KEY)
+        .then(users => {
+            if (users.find(user => user.username === username)) {
+                return Promise.reject('Username taken')
+            }
+            user.createdAt = user.updatedAt = Date.now()
+            return storageService.post(STORAGE_KEY, user)
+                .then(_setLoggedinUser)
+        })
 }
 
 function logout() {
@@ -56,8 +62,8 @@ function _setLoggedinUser(user) {
 function getEmptyCredentials() {
     return {
         fullname: '',
-        username: 'muki',
-        password: 'muki1',
+        username: '',
+        password: '',
     }
 }
 

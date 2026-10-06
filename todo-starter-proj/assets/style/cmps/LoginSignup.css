@@ -1,0 +1,17 @@
+.login-page {
+    display: flex;
+    justify-content: center;
+    padding: 2em 0;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6em;
+    width: 100%;
+    max-width: 300px;
+}
+
+.login-form .btns {
+    text-align: center;
+}
