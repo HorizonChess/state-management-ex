@@ -1,16 +1,62 @@
 .todo-preview {
-    text-align: center;
-    padding: 0.3em;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
+    gap: var(--space-2);
+    padding: var(--space-4);
 }
 
-.todo-preview h4 {
-    text-transform: capitalize;
-    color: black;
+/* The title toggles done on click */
+.todo-preview h2 {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
+    margin: 0;
+    font-size: 1.05rem;
+    cursor: pointer;
+}
+
+.todo-preview h2:hover {
+    color: var(--clr1);
+}
+
+/* Strike only the text, not the check mark */
+.todo-preview h2.done {
+    text-decoration: none;
+}
+
+.todo-preview h2.done .todo-txt {
+    text-decoration: line-through;
+}
+
+.todo-check {
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    width: 1.3em;
+    height: 1.3em;
+    margin-top: 0.05em;
+    font-size: 0.9rem;
+    color: white;
+    border: 2px solid var(--clr1bg);
+    border-radius: 50%;
+}
+
+.todo-preview h2.done .todo-check {
+    background-color: var(--clr1);
+    border-color: var(--clr1);
+}
+
+.todo-importance {
+    padding: 0 var(--space-2);
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--clr2);
+    background-color: var(--clr2bg-light);
+    border-radius: 999px;
 }
 
 .todo-preview img {
-    max-width: 100px;
+    align-self: center;
+    max-width: 80px;
 }

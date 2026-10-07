@@ -1,6 +1,29 @@
 .todo-filter {
-    background-color: var(--clr2bg);
-    padding: 1em;
-    margin: 1em 0;
+    flex-grow: 1;
+    padding: var(--space-4);
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
 }
 
+.todo-filter form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+}
+
+.todo-filter .field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+
+.todo-filter .field-search {
+    flex-grow: 1;
+    min-width: 200px;
+}
+
+.todo-filter input[type="number"] {
+    width: 9em;
+}

@@ -1,0 +1,19 @@
+/* Filter + "Add Todo" on one row */
+.todo-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-4);
+    margin-bottom: var(--space-5);
+}
+
+.todo-toolbar > .btn {
+    margin: 0;
+}
+
+.loading {
+    padding: var(--space-6) 0;
+    text-align: center;
+    color: var(--text-muted);
+}

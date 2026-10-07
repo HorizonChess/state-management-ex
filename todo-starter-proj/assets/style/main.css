@@ -17,6 +17,7 @@
 @import "cmps/FancyBox.css";
 @import "cmps/SplitPane.css";
 
+@import "cmps/TodoIndex.css";
 @import "cmps/TodoFilter.css";
 @import "cmps/TodoList.css";
 @import "cmps/TodoPreview.css";
