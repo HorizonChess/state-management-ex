@@ -14,6 +14,7 @@ import { AboutTeam } from "./cmps/AboutTeam.jsx"
 import { AboutVision } from "./cmps/AboutVision.jsx"
 import { Dashboard } from "./pages/Dashboard.jsx"
 import { LoginSignup } from "./pages/LoginSignup.jsx"
+import { UserDetails } from "./pages/UserDetails.jsx"
 import { store } from "./store/store.js"
 import { loadStats } from "./store/todo.actions.js"
 import { showErrorMsg } from "./services/event-bus.service.js"
@@ -43,6 +44,7 @@ export function RootCmp() {
                             <Route path="/todo" element={<TodoIndex />} />
                             <Route path="/dashboard" element={<Dashboard />} />
                             <Route path="/auth" element={<LoginSignup />} />
+                            <Route path="/user/:userId" element={<UserDetails />} />
 
                         </Routes>
                     </main>

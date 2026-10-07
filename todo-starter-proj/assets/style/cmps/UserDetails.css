@@ -1,0 +1,16 @@
+.user-details h1 {
+    color: var(--clr1);
+}
+
+.activity-list {
+    list-style: none;
+    padding: 0;
+}
+
+.activity-list li {
+    padding: 0.3em 0;
+}
+
+.activity-time {
+    color: gray;
+}
