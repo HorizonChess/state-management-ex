@@ -1,6 +1,7 @@
 const { useEffect, useState } = React
 import {Chart} from '../cmps/Chart.jsx'
 import { todoService } from '../services/todo.service.js'
+import { showErrorMsg } from '../services/event-bus.service.js'
 
 export function Dashboard() {
 
@@ -10,8 +11,10 @@ export function Dashboard() {
     useEffect(()=>{
         todoService.query()
             .then(setTodos)
+            .catch(() => showErrorMsg('Cannot load dashboard'))
         todoService.getImportanceStats()
             .then(setImportanceStats)
+            .catch(() => showErrorMsg('Cannot load dashboard'))
     }, [])
 
 

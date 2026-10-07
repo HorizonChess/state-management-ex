@@ -35,7 +35,7 @@ export function TodoIndex() {
         if (!confirm('Are you sure you want to delete this todo?')) return
         removeTodo(todo)
             .then(() => showSuccessMsg(`Todo removed`))
-            .catch(() => showErrorMsg('Cannot remove todo ' + todo._id))
+            .catch(() => showErrorMsg(`Cannot remove '${todo.txt}'`))
     }
 
     function onToggleTodo(todo) {
@@ -44,7 +44,7 @@ export function TodoIndex() {
             .then((savedTodo) => {
                 showSuccessMsg(`Todo is ${(savedTodo.isDone)? 'done' : 'back on your list'}`)
             })
-            .catch(() => showErrorMsg('Cannot toggle todo ' + todo._id))
+            .catch(() => showErrorMsg(`Cannot update '${todo.txt}'`))
     }
 
     return (

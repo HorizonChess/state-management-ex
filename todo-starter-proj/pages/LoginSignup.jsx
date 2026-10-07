@@ -27,7 +27,7 @@ export function LoginSignup() {
                 showSuccessMsg('Logged in successfully')
                 navigate('/todo')
             })
-            .catch(() => showErrorMsg('Oops try again'))
+            .catch(() => showErrorMsg('Wrong username or password'))
     }
 
     function onSignup(credentials) {

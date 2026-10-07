@@ -4,7 +4,7 @@ const { useSelector } = ReactRedux
 
 import { UserMsg } from "./UserMsg.jsx"
 import { Progress } from "./Progress.jsx"
-import { showErrorMsg } from '../services/event-bus.service.js'
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 import { logout } from '../store/user.actions.js'
 
 
@@ -14,8 +14,11 @@ export function AppHeader() {
 
     function onLogout() {
         logout()
-            .then(() => navigate('/auth'))
-            .catch(() => showErrorMsg('OOPs try again'))
+            .then(() => {
+                showSuccessMsg('Logged out')
+                navigate('/auth')
+            })
+            .catch(() => showErrorMsg('Cannot log out'))
     }
     return (
         <header className="app-header full main-layout">

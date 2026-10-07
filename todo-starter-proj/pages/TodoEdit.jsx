@@ -19,7 +19,10 @@ export function TodoEdit() {
     function loadTodo() {
         todoService.get(params.todoId)
             .then(setTodoToEdit)
-            .catch(err => console.log('err:', err))
+            .catch(err => {
+                console.log('err:', err)
+                showErrorMsg('Cannot load todo')
+            })
     }
 
     function handleChange({ target }) {
@@ -57,7 +60,7 @@ export function TodoEdit() {
                 addActivity(txt).catch(() => showErrorMsg('Cannot record activity'))
 
                 navigate('/todo')
-                showSuccessMsg(`Todo Saved (id: ${savedTodo._id})`)
+                showSuccessMsg(isNew ? 'Todo added' : 'Todo saved')
             })
             .catch(err => {
                 showErrorMsg('Cannot save todo')
