@@ -2,8 +2,9 @@ import { userService } from "../services/user.service.js"
 import { utilService } from "../services/util.service.js"
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
 import { updateUser } from "../store/user.actions.js"
+import { applyPrefs } from "../cmps/UserPrefs.jsx"
 
-const { useState, useEffect } = React
+const { useState, useEffect, useRef } = React
 const { useParams, Link } = ReactRouterDOM
 const { useSelector } = ReactRedux
 
@@ -12,6 +13,19 @@ export function UserDetails() {
     const [user, setUser] = useState(null)
     const [profileToEdit, setProfileToEdit] = useState(null)
     const loggedinUser = useSelector(storeState => storeState.loggedinUser)
+
+    const isOwnPage = !!(user && loggedinUser && loggedinUser._id === user._id)
+
+    // Always holds the latest saved prefs, for restoring them when leaving the page
+    const savedPrefsRef = useRef(null)
+    savedPrefsRef.current = loggedinUser ? loggedinUser.prefs : null
+
+    // Preview the picked colors right away; put the saved ones back on leave
+    useEffect(() => {
+        if (!isOwnPage || !profileToEdit) return
+        applyPrefs(profileToEdit)
+        return () => applyPrefs(savedPrefsRef.current)
+    }, [isOwnPage, profileToEdit])
 
     // The full user (with activities) is only needed here, so load it from the service
     useEffect(() => {
@@ -45,7 +59,6 @@ export function UserDetails() {
 
     if (!user) return <div>Loading...</div>
 
-    const isOwnPage = loggedinUser && loggedinUser._id === user._id
     // On your own page, the store's balance is always filled in and stays live
     const balance = isOwnPage ? loggedinUser.balance : user.balance
     const activities = user.activities || []
