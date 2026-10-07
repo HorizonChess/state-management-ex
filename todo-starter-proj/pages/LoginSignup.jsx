@@ -46,7 +46,8 @@ export function LoginSignup() {
 
     return (
         <div className="login-page">
-            <form className="login-form" onSubmit={handleSubmit}>
+            <form className="login-form card form-stack" onSubmit={handleSubmit}>
+                <h2>{isSignup ? 'Create an account' : 'Welcome back'}</h2>
                 <input
                     type="text"
                     name="username"
@@ -73,7 +74,7 @@ export function LoginSignup() {
                     onChange={handleChange}
                     required
                 />}
-                <button>{isSignup ? 'Signup' : 'Login'}</button>
+                <button className="primary">{isSignup ? 'Sign up' : 'Log in'}</button>
                 <div className="btns">
                     <a href="#" onClick={toggleSignup}>
                         {isSignup ?

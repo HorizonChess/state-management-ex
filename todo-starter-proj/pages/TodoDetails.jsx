@@ -1,5 +1,6 @@
 import { todoService } from "../services/todo.service.js"
 import { showErrorMsg } from "../services/event-bus.service.js"
+import { utilService } from "../services/util.service.js"
 
 const { useState, useEffect } = React
 const { useParams, useNavigate, Link } = ReactRouterDOM
@@ -33,16 +34,28 @@ export function TodoDetails() {
 
     if (!todo) return <div>Loading...</div>
     return (
-        <section className="todo-details">
+        <section className="todo-details card">
             <h1 className={(todo.isDone)? 'done' : ''}>{todo.txt}</h1>
-            <h2>{(todo.isDone)? 'Done!' : 'In your list'}</h2>
 
-            <h1>Todo importance: {todo.importance}</h1>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim rem accusantium, itaque ut voluptates quo? Vitae animi maiores nisi, assumenda molestias odit provident quaerat accusamus, reprehenderit impedit, possimus est ad?</p>
-            <button onClick={onBack}>Back to list</button>
-            <div>
-                <Link to={`/todo/${todo.nextTodoId}`}>Next Todo</Link> |
-                <Link to={`/todo/${todo.prevTodoId}`}>Previous Todo</Link>
+            <div className="todo-details-badges">
+                <span className={'status-badge ' + (todo.isDone ? 'is-done' : '')}>
+                    {(todo.isDone)? 'Done' : 'In your list'}
+                </span>
+                <span className="todo-importance">Importance {todo.importance}</span>
+            </div>
+
+            <p className="todo-details-dates">
+                Created {utilService.getTimeAgo(todo.createdAt)}
+                {todo.updatedAt !== todo.createdAt && ` · Updated ${utilService.getTimeAgo(todo.updatedAt)}`}
+            </p>
+
+            <div className="todo-details-actions">
+                <button onClick={onBack}>Back to list</button>
+                <Link to={`/todo/edit/${todo._id}`} className="btn primary">Edit</Link>
+                <span className="todo-details-nav">
+                    <Link to={`/todo/${todo.prevTodoId}`} className="btn">‹ Previous</Link>
+                    <Link to={`/todo/${todo.nextTodoId}`} className="btn">Next ›</Link>
+                </span>
             </div>
         </section>
     )

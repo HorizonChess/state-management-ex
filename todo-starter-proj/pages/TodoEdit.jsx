@@ -4,7 +4,7 @@ import { loadStats } from "../store/todo.actions.js"
 import { addActivity } from "../store/user.actions.js"
 
 const { useState, useEffect } = React
-const { useNavigate, useParams } = ReactRouterDOM
+const { useNavigate, useParams, Link } = ReactRouterDOM
 
 export function TodoEdit() {
 
@@ -72,18 +72,30 @@ export function TodoEdit() {
 
     return (
         <section className="todo-edit">
-            <form onSubmit={onSaveTodo} >
-                <label htmlFor="txt">Text:</label>
-                <input onChange={handleChange} value={txt} type="text" name="txt" id="txt" />
+            <form className="card form-stack" onSubmit={onSaveTodo} >
+                <h2>{todoToEdit._id ? 'Edit todo' : 'New todo'}</h2>
 
-                <label htmlFor="importance">Importance:</label>
-                <input onChange={handleChange} value={importance} type="number" name="importance" id="importance" />
+                <div className="field">
+                    <label htmlFor="txt">Text</label>
+                    <input onChange={handleChange} value={txt} type="text" name="txt" id="txt"
+                        placeholder="What needs to be done?" required />
+                </div>
 
-                <label htmlFor="isDone">isDone:</label>
-                <input onChange={handleChange} value={isDone} type="checkbox" name="isDone" id="isDone" />
+                <div className="field">
+                    <label htmlFor="importance">Importance (1-10)</label>
+                    <input onChange={handleChange} value={importance} type="number" name="importance" id="importance"
+                        min="1" max="10" />
+                </div>
 
+                <div className="field field-inline">
+                    <input onChange={handleChange} checked={isDone} type="checkbox" name="isDone" id="isDone" />
+                    <label htmlFor="isDone">Done</label>
+                </div>
 
-                <button>Save</button>
+                <div className="form-actions">
+                    <Link to="/todo" className="btn">Cancel</Link>
+                    <button className="primary">Save</button>
+                </div>
             </form>
         </section>
     )

@@ -26,6 +26,38 @@
     padding: var(--space-5) 0;
 }
 
+/* White panel used by forms and detail pages */
+.card {
+    padding: var(--space-5);
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+/* Stacked label + field pairs inside a form */
+.form-stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.form-stack .field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+
+.form-stack .field-inline {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.form-stack button {
+    margin: 0;
+}
+
 .container {
     max-width: 800px;
     padding: 1em;

@@ -1,17 +1,25 @@
 .login-page {
     display: flex;
     justify-content: center;
-    padding: 2em 0;
+    padding: var(--space-6) 0;
 }
 
 .login-form {
-    display: flex;
-    flex-direction: column;
-    gap: 0.6em;
     width: 100%;
-    max-width: 300px;
+    max-width: 360px;
+}
+
+.login-form h2 {
+    margin: 0;
+    text-align: center;
 }
 
 .login-form .btns {
+    font-size: 0.9rem;
     text-align: center;
+    color: var(--clr1);
+}
+
+.login-form .btns a:hover {
+    text-decoration: underline;
 }

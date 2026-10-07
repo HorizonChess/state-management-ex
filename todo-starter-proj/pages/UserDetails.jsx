@@ -64,40 +64,52 @@ export function UserDetails() {
     const activities = user.activities || []
     return (
         <section className="user-details">
-            <h1>{user.fullname}</h1>
-            <p>Balance: {balance}</p>
+            <header className="user-details-header">
+                <h1>{user.fullname}</h1>
+                <span className="user-balance">Balance: {balance}</span>
+            </header>
 
             {isOwnPage &&
-                <form className="profile-form" onSubmit={onSaveProfile}>
+                <form className="profile-form card" onSubmit={onSaveProfile}>
                     <h2>Profile</h2>
-                    <label htmlFor="fullname">Name:</label>
-                    <input value={profileToEdit.fullname} onChange={handleChange}
-                        type="text" id="fullname" name="fullname" required />
+                    <div className="profile-fields">
+                        <div className="field field-name">
+                            <label htmlFor="fullname">Name</label>
+                            <input value={profileToEdit.fullname} onChange={handleChange}
+                                type="text" id="fullname" name="fullname" required />
+                        </div>
 
-                    <label htmlFor="color">Color:</label>
-                    <input value={profileToEdit.color} onChange={handleChange}
-                        type="color" id="color" name="color" />
+                        <div className="field">
+                            <label htmlFor="color">Text color</label>
+                            <input value={profileToEdit.color} onChange={handleChange}
+                                type="color" id="color" name="color" />
+                        </div>
 
-                    <label htmlFor="bgColor">BG Color:</label>
-                    <input value={profileToEdit.bgColor} onChange={handleChange}
-                        type="color" id="bgColor" name="bgColor" />
+                        <div className="field">
+                            <label htmlFor="bgColor">Background</label>
+                            <input value={profileToEdit.bgColor} onChange={handleChange}
+                                type="color" id="bgColor" name="bgColor" />
+                        </div>
 
-                    <button>Save</button>
+                        <button className="primary">Save</button>
+                    </div>
                 </form>}
 
-            <h2>Activities</h2>
-            {activities.length ?
-                <ul className="activity-list">
-                    {activities.map((activity, idx) =>
-                        <li key={activity.at + '-' + idx}>
-                            <span className="activity-time">{utilService.getTimeAgo(activity.at)}: </span>
-                            {activity.txt}
-                        </li>
-                    )}
-                </ul> :
-                <p>No activities yet</p>}
+            <section className="card">
+                <h2>Activities</h2>
+                {activities.length ?
+                    <ul className="activity-list">
+                        {activities.map((activity, idx) =>
+                            <li key={activity.at + '-' + idx}>
+                                <span className="activity-txt">{activity.txt}</span>
+                                <span className="activity-time">{utilService.getTimeAgo(activity.at)}</span>
+                            </li>
+                        )}
+                    </ul> :
+                    <p className="no-activities">No activities yet</p>}
+            </section>
 
-            <Link to="/todo">Back to todos</Link>
+            <Link to="/todo" className="btn">‹ Back to todos</Link>
         </section>
     )
 }
