@@ -11,6 +11,8 @@ export const userService = {
     getEmptyCredentials,
     updateBalance,
     addActivity,
+    updateUser,
+    getDefaultPrefs,
 }
 const STORAGE_KEY_LOGGEDIN = 'user'
 const STORAGE_KEY = 'userDB'
@@ -44,6 +46,7 @@ function signup({ username, password, fullname }) {
             user.createdAt = user.updatedAt = Date.now()
             user.balance = STARTING_BALANCE
             user.activities = []
+            user.prefs = getDefaultPrefs()
             return storageService.post(STORAGE_KEY, user)
                 .then(_setLoggedinUser)
         })
@@ -72,6 +75,23 @@ function updateBalance(diff) {
         .then(_setLoggedinUser)
 }
 
+// Saves the editable profile fields; loads the stored user first so
+// fields the caller doesn't send (activities, balance...) are kept as they are
+function updateUser({ _id, fullname, prefs }) {
+    return getById(_id)
+        .then(user => {
+            user.fullname = fullname
+            user.prefs = prefs
+            user.updatedAt = Date.now()
+            return storageService.put(STORAGE_KEY, user)
+        })
+        .then(_setLoggedinUser)
+}
+
+function getDefaultPrefs() {
+    return { color: '#000000', bgColor: '#ffffff' }
+}
+
 // Records an activity (newest first) on the logged-in user and saves it
 function addActivity(txt) {
     const loggedinUser = getLoggedinUser()
@@ -96,6 +116,7 @@ function _setLoggedinUser(user) {
         _id: user._id,
         fullname: user.fullname,
         balance: _getBalance(user),
+        prefs: user.prefs || null, // null: no prefs saved, keep the app's own colors
     }
     sessionStorage.setItem(STORAGE_KEY_LOGGEDIN, JSON.stringify(userToSave))
     return userToSave

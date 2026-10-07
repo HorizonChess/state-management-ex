@@ -52,6 +52,18 @@ export function addActivity(txt) {
         })
 }
 
+export function updateUser(userToUpdate) {
+    return userService.updateUser(userToUpdate)
+        .then(loggedinUser => {
+            store.dispatch({ type: SET_USER, loggedinUser })
+            return loggedinUser
+        })
+        .catch(err => {
+            console.log('user action -> Cannot update user', err)
+            throw err
+        })
+}
+
 export function logout() {
     return userService.logout()
         .then(() => store.dispatch({ type: SET_USER, loggedinUser: null }))

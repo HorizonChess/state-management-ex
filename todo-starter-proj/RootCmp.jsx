@@ -5,6 +5,7 @@ const { useEffect } = React
 
 import { AppHeader } from "./cmps/AppHeader.jsx"
 import { AppFooter } from "./cmps/AppFooter.jsx"
+import { UserPrefs } from "./cmps/UserPrefs.jsx"
 import { Home } from "./pages/Home.jsx"
 import { About } from "./pages/About.jsx"
 import { TodoIndex } from "./pages/TodoIndex.jsx"
@@ -28,6 +29,7 @@ export function RootCmp() {
 
     return (
         <Provider store={store}>
+            <UserPrefs />
             <Router>
                 <section className="app main-layout">
                     <AppHeader />

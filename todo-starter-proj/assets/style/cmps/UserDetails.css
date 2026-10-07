@@ -2,6 +2,20 @@
     color: var(--clr1);
 }
 
+.profile-form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6em;
+    padding: 1em;
+    background-color: var(--clr2bg);
+}
+
+.profile-form h2 {
+    width: 100%;
+    margin: 0;
+}
+
 .activity-list {
     list-style: none;
     padding: 0;
