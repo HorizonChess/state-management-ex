@@ -1,15 +1,16 @@
 .progress {
     position: relative;
-    width: 160px;
-    height: 1.4em;
-    border-radius: 0.7em;
-    background-color: var(--clr2bg-light);
+    width: 180px;
+    height: 1.5em;
+    border-radius: 999px;
+    background-color: rgba(255, 255, 255, 0.85);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
     overflow: hidden;
 }
 
 .progress-bar {
     height: 100%;
-    background-color: var(--clr2);
+    background-color: var(--clr2bg);
     transition: width 0.3s;
 }
 
@@ -18,19 +19,30 @@
     inset: 0;
     display: grid;
     place-items: center;
-    font-size: 0.8em;
-    color: black;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--clr1-dark);
 }
 
+/* Footer */
+
 .app-footer {
-    margin-top: 2em;
+    margin-top: var(--space-6);
     background-color: var(--clr1);
     color: var(--clr2bg-light);
 }
 
 .footer-container {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    padding: 0.5em 0;
+    gap: var(--space-3);
+    padding: var(--space-4) 0;
+}
+
+.footer-container p {
+    margin: 0;
+    font-size: 0.875rem;
+    opacity: 0.85;
 }

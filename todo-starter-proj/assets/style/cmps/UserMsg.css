@@ -1,13 +1,19 @@
 .user-msg {
-    background-color: lightgray;
-    padding: .5em 1em;
     position: fixed;
-    bottom: 1em;
-    right: 1em;
+    bottom: var(--space-5);
+    right: var(--space-5);
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    max-width: 360px;
+    padding: var(--space-3) var(--space-4);
+    font-size: 0.95rem;
+    font-weight: 500;
     color: white;
-    font-weight: bold;
-    border: 3px solid black;
-    border-radius: 2px;
+    border-left: 4px solid rgba(255, 255, 255, 0.5);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
 }
 
 .user-msg.success {
@@ -18,8 +24,6 @@
     background-color: var(--clr2);
 }
 
-
-.user-msg button{
-    float: right;
-    margin: 1em;
+.user-msg p {
+    margin: 0;
 }

@@ -30,15 +30,14 @@ export function AppHeader() {
                     <NavLink to="/about" >About</NavLink>
                     <NavLink to="/todo" >Todos</NavLink>
                     <NavLink to="/dashboard" >Dashboard</NavLink>
-                    <span> - </span>
-                    {user ?
-                        <section className="user-info">
-                            <Link to={`/user/${user._id}`}>Hello {user.fullname}</Link>
-                            <span className="user-balance">Balance: {user.balance}</span>
-                            <button onClick={onLogout}>Logout</button>
-                        </section> :
-                        <NavLink to="/auth" >Login</NavLink>}
                 </nav>
+                {user ?
+                    <section className="user-info">
+                        <Link to={`/user/${user._id}`} className="user-name">Hello {user.fullname}</Link>
+                        <span className="user-balance">Balance: {user.balance}</span>
+                        <button onClick={onLogout}>Logout</button>
+                    </section> :
+                    <NavLink to="/auth" className="login-link">Login</NavLink>}
             </section>
             <UserMsg />
         </header>
