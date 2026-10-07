@@ -13,3 +13,9 @@
     align-items: center;
     background-color: var(--clr1bg);
 }
+
+.no-todos {
+    text-align: center;
+    color: gray;
+    padding: 2em 0;
+}

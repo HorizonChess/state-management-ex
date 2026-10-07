@@ -3,6 +3,8 @@ const { Link } = ReactRouterDOM
 
 export function TodoList({ todos, onRemoveTodo, onToggleTodo }) {
 
+    if (!todos.length) return <p className="no-todos">No todos to show</p>
+
     return (
         <ul className="todo-list">
             {todos.map(todo =>
