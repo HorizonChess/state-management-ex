@@ -1,7 +1,7 @@
 const { useSelector } = ReactRedux
 
 export function Progress() {
-    const stats = useSelector(storeState => storeState.stats)
+    const stats = useSelector(storeState => storeState.todoModule.stats)
     if (!stats) return null
 
     const { total, done } = stats

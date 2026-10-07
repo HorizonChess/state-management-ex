@@ -10,9 +10,9 @@ const { useSelector } = ReactRedux
 
 export function TodoIndex() {
 
-    const todos = useSelector(storeState => storeState.todos)
-    const isLoading = useSelector(storeState => storeState.isLoading)
-    const filterBy = useSelector(storeState => storeState.filterBy)
+    const todos = useSelector(storeState => storeState.todoModule.todos)
+    const isLoading = useSelector(storeState => storeState.todoModule.isLoading)
+    const filterBy = useSelector(storeState => storeState.todoModule.filterBy)
 
     // Special hook for accessing search-params:
     const [searchParams, setSearchParams] = useSearchParams()

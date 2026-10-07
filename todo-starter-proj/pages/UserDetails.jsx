@@ -12,7 +12,7 @@ export function UserDetails() {
     const { userId } = useParams()
     const [user, setUser] = useState(null)
     const [profileToEdit, setProfileToEdit] = useState(null)
-    const loggedinUser = useSelector(storeState => storeState.loggedinUser)
+    const loggedinUser = useSelector(storeState => storeState.userModule.loggedinUser)
 
     const isOwnPage = !!(user && loggedinUser && loggedinUser._id === user._id)
 

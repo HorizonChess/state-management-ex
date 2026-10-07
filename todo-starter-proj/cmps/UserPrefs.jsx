@@ -3,8 +3,10 @@ const { useSelector } = ReactRedux
 
 // Applies the logged-in user's saved color prefs to the whole page; renders nothing
 export function UserPrefs() {
-    const prefs = useSelector(storeState =>
-        storeState.loggedinUser ? storeState.loggedinUser.prefs : null)
+    const prefs = useSelector(storeState => {
+        const { loggedinUser } = storeState.userModule
+        return loggedinUser ? loggedinUser.prefs : null
+    })
 
     useEffect(() => {
         applyPrefs(prefs)

@@ -1,5 +1,6 @@
 import { userService } from "../services/user.service.js"
-import { store, SET_USER } from "./store.js"
+import { store } from "./store.js"
+import { SET_USER } from "./user.reducer.js"
 
 export function login(credentials) {
     return userService.login(credentials)
@@ -39,7 +40,7 @@ export function updateBalance(diff) {
 
 // Logs what the user did; does nothing when nobody is logged in
 export function addActivity(txt) {
-    if (!store.getState().loggedinUser) return Promise.resolve()
+    if (!store.getState().userModule.loggedinUser) return Promise.resolve()
 
     return userService.addActivity(txt)
         .then(loggedinUser => {

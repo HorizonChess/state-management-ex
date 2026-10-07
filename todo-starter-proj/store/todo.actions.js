@@ -1,5 +1,6 @@
 import { todoService } from "../services/todo.service.js"
-import { store, SET_TODOS, REMOVE_TODO, UPDATE_TODO, SET_IS_LOADING, SET_FILTER_BY, SET_STATS } from "./store.js"
+import { store } from "./store.js"
+import { SET_TODOS, REMOVE_TODO, UPDATE_TODO, SET_IS_LOADING, SET_FILTER_BY, SET_STATS } from "./todo.reducer.js"
 import { updateBalance, addActivity } from "./user.actions.js"
 
 export function loadTodos(filterBy) {
@@ -32,7 +33,8 @@ export function removeTodo(todo) {
 const DONE_REWARD = 10
 
 export function saveTodo(todo) {
-    const { todos, loggedinUser } = store.getState()
+    const { todos } = store.getState().todoModule
+    const { loggedinUser } = store.getState().userModule
     const prevTodo = todos && todos.find(currTodo => currTodo._id === todo._id)
     const isCompleted = todo.isDone && prevTodo && !prevTodo.isDone
 
