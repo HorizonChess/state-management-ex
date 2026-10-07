@@ -1,12 +1,17 @@
-const { useState, useEffect } = React
+import { utilService } from "../services/util.service.js"
+
+const { useState, useEffect, useRef } = React
 
 export function TodoFilter({ filterBy, onSetFilterBy }) {
 
     const [filterByToEdit, setFilterByToEdit] = useState({...filterBy})
 
+    // Created once (kept in a ref) so every keystroke shares the same timer
+    const debouncedOnSetFilterBy = useRef(utilService.debounce(onSetFilterBy, 400)).current
+
     useEffect(() => {
-        // Notify parent
-        onSetFilterBy(filterByToEdit)
+        // Notify parent once typing pauses; the inputs themselves update right away
+        debouncedOnSetFilterBy(filterByToEdit)
     }, [filterByToEdit])
 
     function handleChange({ target }) {

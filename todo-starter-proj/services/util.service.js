@@ -6,6 +6,16 @@ export const utilService = {
     saveToStorage,
     animateCSS,
     getTimeAgo,
+    debounce,
+}
+
+// Returns a function that runs func only after calls have stopped for `wait` ms
+function debounce(func, wait = 400) {
+    let timeoutId
+    return (...args) => {
+        clearTimeout(timeoutId)
+        timeoutId = setTimeout(() => func(...args), wait)
+    }
 }
 
 // "just now", "5 minutes ago", "3 hours ago", "yesterday", or a date
