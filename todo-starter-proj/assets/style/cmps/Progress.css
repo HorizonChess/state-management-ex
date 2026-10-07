@@ -27,7 +27,6 @@
 /* Footer */
 
 .app-footer {
-    margin-top: var(--space-6);
     background-color: var(--clr1);
     color: var(--clr2bg-light);
 }

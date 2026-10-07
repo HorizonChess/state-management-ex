@@ -15,6 +15,13 @@
     grid-column: 1/-1;
 }
 
+/* Header, main, footer: main takes the leftover height so the footer
+   sits at the bottom of the window even when the page is short */
+.app {
+    min-height: 100vh;
+    grid-template-rows: auto 1fr auto;
+}
+
 .app > main {
     padding: var(--space-5) 0;
 }
