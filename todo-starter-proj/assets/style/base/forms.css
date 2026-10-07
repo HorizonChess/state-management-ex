@@ -1,19 +1,84 @@
+/* Buttons */
+
 button, .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    margin: var(--space-1);
+    padding: var(--space-2) var(--space-4);
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--gray3);
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
     cursor: pointer;
-    background-color: var(--clr2bg);
-    margin: 0.5em;
-    border: 0;
-    padding: 0.5em 0.8em;
-    border-radius: 4px;
+    transition: background-color 0.15s, border-color 0.15s, color 0.15s;
 }
 
 button:hover, .btn:hover {
-    background-color: var(--clr2);
-    color: white;
-    transition: 0.3s;
+    background-color: var(--clr2bg-light);
+    border-color: var(--clr2bg);
 }
 
-input:focus {
-    background-color: var(--clr1bg);
-    transition: background-color 1s;
+/* Main action on a page: Save, Login, Add Todo... */
+button.primary, .btn.primary {
+    color: white;
+    background-color: var(--clr1);
+    border-color: var(--clr1);
+}
+
+button.primary:hover, .btn.primary:hover {
+    background-color: var(--clr1-dark);
+    border-color: var(--clr1-dark);
+}
+
+/* Inputs */
+
+input, select, textarea {
+    font: inherit;
+    font-size: 0.95rem;
+    padding: var(--space-2) var(--space-3);
+    color: var(--gray3);
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+input:hover, select:hover, textarea:hover {
+    border-color: var(--clr1bg);
+}
+
+input[type="checkbox"] {
+    width: 1.1em;
+    height: 1.1em;
+    accent-color: var(--clr1);
+}
+
+input[type="color"] {
+    width: 3em;
+    height: 2.2em;
+    padding: 2px;
+    cursor: pointer;
+}
+
+label {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+/* Visible keyboard focus everywhere */
+
+button:focus-visible,
+.btn:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+a:focus-visible {
+    outline: none;
+    border-color: var(--clr1);
+    box-shadow: 0 0 0 3px var(--clr1bg-light);
 }

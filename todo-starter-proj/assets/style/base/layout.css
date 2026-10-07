@@ -1,6 +1,10 @@
+/* Content column capped at --content-width, with side gutters on small screens */
 .main-layout {
     display: grid;
-    grid-template-columns: 1.6rem 1fr 1.6rem;
+    grid-template-columns:
+        minmax(var(--space-4), 1fr)
+        minmax(auto, var(--content-width))
+        minmax(var(--space-4), 1fr);
 }
 
 .main-layout > * {
@@ -9,6 +13,10 @@
 
 .main-layout .full {
     grid-column: 1/-1;
+}
+
+.app > main {
+    padding: var(--space-5) 0;
 }
 
 .container {

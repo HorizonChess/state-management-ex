@@ -39,3 +39,8 @@ a.active {
         color: var(--clr2bg-light);
     }
 }
+
+/* The app title keeps the handwritten display font */
+.header-container h1 {
+    font-family: var(--font-display);
+}
