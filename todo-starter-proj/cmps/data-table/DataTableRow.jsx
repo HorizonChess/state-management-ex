@@ -25,7 +25,7 @@ export function DataTableRow({ todo, onRemoveTodo }) {
                 <h5>{todo.txt}</h5>
                 <img src={`https://robohash.org/${todo._id}`} style={{ maxWidth: '50px' }} />
                 <p>{todo.txt}s are best for lorem ipsum dolor</p>
-                <button onClick={() => onRemoveTodo(todo._id)}>Remove Todo</button>
+                <button onClick={() => onRemoveTodo(todo)}>Remove Todo</button>
             </td>
         </tr>
     </Fragment>

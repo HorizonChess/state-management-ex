@@ -32,11 +32,11 @@ export function TodoIndex() {
             .catch(() => showErrorMsg('Cannot load todos'))
     }, [filterBy])
 
-    function onRemoveTodo(todoId) {
+    function onRemoveTodo(todo) {
         if (!confirm('Are you sure you want to delete this todo?')) return
-        removeTodo(todoId)
+        removeTodo(todo)
             .then(() => showSuccessMsg(`Todo removed`))
-            .catch(() => showErrorMsg('Cannot remove todo ' + todoId))
+            .catch(() => showErrorMsg('Cannot remove todo ' + todo._id))
     }
 
     function onToggleTodo(todo) {

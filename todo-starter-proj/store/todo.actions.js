@@ -16,17 +16,13 @@ export function loadTodos(filterBy) {
         .finally(() => store.dispatch({ type: SET_IS_LOADING, isLoading: false }))
 }
 
-export function removeTodo(todoId) {
-    // Grab the text now, the todo is gone after removing it
-    const { todos } = store.getState()
-    const todo = todos && todos.find(currTodo => currTodo._id === todoId)
-
-    return todoService.remove(todoId)
+export function removeTodo(todo) {
+    return todoService.remove(todo._id)
         .then(() => {
-            store.dispatch({ type: REMOVE_TODO, todoId })
+            store.dispatch({ type: REMOVE_TODO, todoId: todo._id })
             return loadStats()
         })
-        .then(() => addActivity(`Removed the Todo: '${todo ? todo.txt : todoId}'`))
+        .then(() => addActivity(`Removed the Todo: '${todo.txt}'`))
         .catch(err => {
             console.log('todo action -> Cannot remove todo', err)
             throw err
