@@ -38,7 +38,15 @@ export function saveTodo(todo) {
     const prevTodo = todos && todos.find(currTodo => currTodo._id === todo._id)
     const isCompleted = todo.isDone && prevTodo && !prevTodo.isDone
 
+    // Optimistic: show the change right away, before the server answers
+    if (prevTodo) store.dispatch({ type: UPDATE_TODO, todo })
+
     return todoService.save(todo)
+        .catch(err => {
+            // The save failed: put the previous version back
+            if (prevTodo) store.dispatch({ type: UPDATE_TODO, todo: prevTodo })
+            throw err
+        })
         .then(savedTodo => {
             store.dispatch({ type: UPDATE_TODO, todo: savedTodo })
             return loadStats()
